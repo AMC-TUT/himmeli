@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Item</h1>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Event</th>
+          <th>Date</th>
+          <th>Duration</th>
+          <th>Answer</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td><%= @item.event.person.first_name %> <%= @item.event.person.last_name %>, <%=l @item.event.created_at %></td>
+          <td><%=l @item.created_at %></td>
+          <td><%= @item.duration %></td>
+          <td style="padding-left: 25px;">
+            <% if @item.answer %>
+              <span class="glyphicon glyphicon-ok" style="color: green;"></span>
+            <% else %>
+              <span class="glyphicon glyphicon-remove" style="color: red;"></span>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <br>
+
+    <%= link_to 'Edit Item', edit_item_path(@item), :class => 'btn btn-primary' %>
+    <%= link_to 'Back', items_path, :class => 'btn btn-default' %>
+  </div>
+</div>

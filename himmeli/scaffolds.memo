@@ -1,0 +1,21 @@
+
+rails generate simple_form:install --bootstrap
+
+rails generate devise:install
+
+rails generate devise User
+
+bundle exec rake db:migrate
+
+rails g devise:views
+
+rails g scaffold Person first_name:string last_name:string scores:integer level:integer
+
+rails g scaffold Setting person:references key:string value:string
+
+rails g scaffold Event person:references duration:integer level:integer scores:integer
+
+rails g scaffold Item event:references duration:integer answer:boolean
+
+# , :default => false
+# , index: true

@@ -1,0 +1,36 @@
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none !important;
+}
+
+body > .container {
+  //padding-top: 60px;
+}
+
+.himmeli {
+  .container {
+    width: 768px;
+  }
+
+  .navbar-brand {
+    font-weight: bold;
+  }
+
+  h1 {
+    margin-bottom: 30px;
+  }
+
+  .card {
+    width: 500px;
+    margin: 50px auto;
+    padding: 50px;
+    text-align: center;
+    border: 1px solid #CCC;
+  }
+}
+
+
+@import "bootstrap";

@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Listing events</h1>
+
+    <% if @events.blank? %>
+      <%= render :partial => 'shared/empty' %>
+    <% else %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Person</th>
+          <th>Date</th>
+          <th>Duration</th>
+          <th>Level</th>
+          <th>Scores</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @events.each do |event| %>
+          <tr>
+            <td><%= event.person.first_name %> <%= event.person.last_name %></td>
+            <td><%=l event.created_at %></td>
+            <td><%= event.duration %></td>
+            <td><%= event.level %></td>
+            <td><%= event.scores %></td>
+            <td><%= link_to 'Show', event %></td>
+            <td><%= link_to 'Edit', edit_event_path(event) %></td>
+            <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% end %>
+
+    <br>
+
+    <%= link_to 'New Event', new_event_path, :class => 'btn btn-primary' %>
+
+  </div>
+</div>
+

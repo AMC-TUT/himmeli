@@ -1,0 +1,33 @@
+<%= simple_form_for @item, :html => { :class => 'form-horizontal' } do |f| %>
+
+  <% @model = @item %>
+  <%= render 'shared/error_messages' %>
+
+  <div class="control-group">
+    <%= f.label :event, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.association :event, collection: Event.all(order: 'id'), prompt: "Choose a Event", :label => false, :label_method => lambda { |e| "#{e.person.last_name}, #{e.person.first_name}; #{e.created_at}" }, :value_method => :id, :class => 'form-control', required: true %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :duration, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :duration, :class => 'number_field form-control', required: true, :min => 0 %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :answer, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :answer, :class => 'number_field form-control', required: true, :max => 1, :min => 0 %>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn btn-primary' %>
+    <%= link_to 'Cancel', items_path, :class => 'btn btn-default' %>
+  </div>
+<% end %>
