@@ -19,3 +19,58 @@
 $('span[rel=tooltip]').tooltip({
   placement: "top"
 });
+
+$('.scores-chart-pills a').on('click', function(e) {
+  e.preventDefault();
+
+  var $tgt = $(e.target);
+
+  $tgt.parent('li').addClass('active').siblings().removeClass('active');
+
+  drawScoresPerEventChart( $tgt.data('level') );
+
+});
+
+var Himmeli = {};
+
+var pid = 6;
+$.get('http://dev:3000/people/' + pid + '.json').then(function(data) {
+  Himmeli = data;
+});
+
+function drawScoresPerEventChart(level) {
+  var level = level || 1,
+    events = Himmeli.scoresPerEvent[level-1],
+    data = _.pluck(events, 'scores'),
+    labels = [];
+
+  _.each(events, function(e, index) {
+    labels.push(index+1 + '');
+  });
+
+
+  var lineChartData = {
+      labels : labels, // ["January","February","March","April","May","June","July"],
+      datasets : [
+        {
+          fillColor : "rgba(151,187,205,0.5)",
+          strokeColor : "rgba(151,187,205,1)",
+          pointColor : "rgba(151,187,205,1)",
+          pointStrokeColor : "#fff",
+          data : data //[28,48,40,19,96,27,100]
+        }
+      ]
+
+    };
+
+    var chartLine = new Chart(document.getElementById("scoresPerEventChart").getContext("2d")).Line(lineChartData);
+}
+
+setTimeout(function() {
+  drawScoresPerEventChart();
+}, 300);
+
+
+
+
+

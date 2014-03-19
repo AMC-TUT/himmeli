@@ -71,4 +71,6 @@ class PeopleController < ApplicationController
     def person_params
       params.require(:person).permit(:first_name, :last_name, :scores, :level)
     end
+
+
 end

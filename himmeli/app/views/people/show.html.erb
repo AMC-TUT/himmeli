@@ -21,7 +21,41 @@
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
 
+<div class="row hidden-print">
+  <div class="col-sm-12">
+    <h2>Developmental Characteristics</h2>
+  </div>
+</div>
+
+<div class="row hidden-print">
+  <div class="col-sm-12">
+    <h3>Scores / Event</h3>
+    <ul class="nav nav-pills scores-chart-pills">
+      <li class="active"><a href="" data-level="1">Level 1</a></li>
+      <li><a href="#" data-level="2">Level 2</a></li>
+      <li><a href="#" data-level="3">Level 3</a></li>
+      <li><a href="#" data-level="4">Level 4</a></li>
+      <li><a href="#" data-level="5">Level 5</a></li>
+      <li><a href="#" data-level="6">Level 6</a></li>
+    </ul>
+    <br>
+    <canvas id="scoresPerEventChart" width="738" height="400"></canvas>
+  </div>
+</div>
+
+<div class="row hidden-print">
+  <div class="col-sm-12">
+    <h3>Average reply time in Event</h3>
+    <canvas id="avgItemReplyTimeChart" width="738" height="400"></canvas>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <h2 class="hidden-print">ID Card</h2>
     <div class="card">
       <h2><%= @person.first_name %> <%= @person.last_name %></h2>
       <div class="qrcode">
@@ -34,6 +68,5 @@
 
     <%= link_to 'Edit Person', edit_person_path(@person), :class => 'btn btn-primary hidden-print' %>
     <%= link_to 'Back', people_path, :class => 'btn btn-default hidden-print' %>
-
   </div>
 </div>
