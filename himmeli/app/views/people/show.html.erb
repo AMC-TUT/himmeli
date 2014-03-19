@@ -4,17 +4,19 @@
     <table class="table">
       <thead>
         <tr>
-          <th>First name</th>
-          <th>Last name</th>
-          <th>Scores</th>
+          <th>Person</th>
+          <th>Total Scores</th>
+          <th>Avg. Scores</th>
+          <th>Avg. Duration</th>
           <th>Level</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><%= @person.first_name %></td>
-          <td><%= @person.last_name %></td>
-          <td><%= @person.scores %></td>
+          <td><%= @person.first_name %> <%= @person.last_name %></td>
+          <td><%= @person.events.sum('scores') %></td>
+          <td><% unless @person.events.empty? %><%= @person.events.average('scores').floor %><% end %></td>
+            <td><% unless @person.events.empty? %><%= @person.events.average('duration').floor %><% end %></td>
           <td><%= @person.level %></td>
         </tr>
       </tbody>
@@ -23,7 +25,7 @@
     <div class="card">
       <h2><%= @person.first_name %> <%= @person.last_name %></h2>
       <div class="qrcode">
-        <% link = "http://himmeli.pori.tut.fi/game?p=" + @person.id.to_s %>
+        <% link = "/game?p=" + @person.id.to_s %>
         <%= link_to link, :target => "_blank" do %>
         <img src="https://chart.googleapis.com/chart?cht=qr&chs=250x250&chl=<%= link %>" />
         <% end %>

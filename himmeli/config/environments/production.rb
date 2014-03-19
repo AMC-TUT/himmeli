@@ -77,4 +77,9 @@ Himmeli::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # Himmeli
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  # set per_page globally
+  WillPaginate.per_page = 50
 end

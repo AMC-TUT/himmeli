@@ -24,13 +24,29 @@
             <td><%= setting.person.first_name %> <%= setting.person.last_name %></td>
             <td><%= setting.key %></td>
             <td><%= setting.value %></td>
-            <td><%= link_to 'Show', setting %></td>
-            <td><%= link_to 'Edit', edit_setting_path(setting) %></td>
-            <td><%= link_to 'Destroy', setting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td>
+              <%= link_to setting do %>
+                <span class="glyphicon glyphicon-info-sign" rel="tooltip" title="Show"></span>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to edit_setting_path(setting) do %>
+                <span class="glyphicon glyphicon-pencil" rel="tooltip" title="Edit"></span>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to setting, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <span class="glyphicon glyphicon-trash" rel="tooltip" title="Remove"></span>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>
     </table>
+
+    <div class="pagination-holder">
+      <%= will_paginate @settings, :renderer => BootstrapPagination::Rails %>
+    </div>
     <% end %>
 
     <br>

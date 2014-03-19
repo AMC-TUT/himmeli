@@ -27,13 +27,29 @@
             <td><%= event.duration %></td>
             <td><%= event.level %></td>
             <td><%= event.scores %></td>
-            <td><%= link_to 'Show', event %></td>
-            <td><%= link_to 'Edit', edit_event_path(event) %></td>
-            <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td>
+              <%= link_to event  do %>
+                <span class="glyphicon glyphicon-info-sign" rel="tooltip" title="Show"></span>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to edit_event_path(event) do %>
+                <span class="glyphicon glyphicon-pencil" rel="tooltip" title="Edit"></span>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to event, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <span class="glyphicon glyphicon-trash" rel="tooltip" title="Remove"></span>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>
     </table>
+
+    <div class="pagination-holder">
+      <%= will_paginate @events, :renderer => BootstrapPagination::Rails %>
+    </div>
     <% end %>
 
     <br>

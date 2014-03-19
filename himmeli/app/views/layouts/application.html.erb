@@ -25,12 +25,13 @@
           </button>
           <%= link_to 'Himmeli', people_path, :class => 'navbar-brand' %>
         </div>
-        <div class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse pull-right">
           <ul class="nav navbar-nav">
             <li><%= link_to 'People', people_path %></li>
             <li><%= link_to 'Events', events_path %></li>
             <li><%= link_to 'Items', items_path %></li>
             <li><%= link_to 'Settings', settings_path %></li>
+            <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -52,7 +53,7 @@
 
         <p class="pull-right text-muted">
           <% if user_signed_in? %>
-          Olet kirjautunut käyttäjänä <%= current_user.email %>.
+          Logged in as <%= current_user.email %>.
           <% end %>
         </p>
       </footer>

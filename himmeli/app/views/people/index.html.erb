@@ -8,9 +8,10 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>First name</th>
-          <th>Last name</th>
-          <th>Scores</th>
+          <th>Person</th>
+          <th>Total Scores</th>
+          <th>Avg. Scores</th>
+          <th>Avg. Duration</th>
           <th>Level</th>
           <th></th>
           <th></th>
@@ -21,17 +22,32 @@
       <tbody>
         <% @people.each do |person| %>
           <tr>
-            <td><%= person.first_name %></td>
-            <td><%= person.last_name %></td>
-            <td><%= person.scores %></td>
+            <td><%= person.first_name %> <%= person.last_name %></td>
+            <td><%= person.events.sum('scores') %></td>
+            <td><% unless person.events.empty? %><%= person.events.average('scores').floor %><% end %></td>
+            <td><% unless person.events.empty? %><%= person.events.average('duration').floor %><% end %></td>
             <td><%= person.level %></td>
-            <td><%= link_to 'Show', person %></td>
-            <td><%= link_to 'Edit', edit_person_path(person) %></td>
-            <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td>
+              <%= link_to person do %>
+                <span class="glyphicon glyphicon-info-sign" rel="tooltip" title="Show"></span>
+              <% end %>
+            </td>
+            <td><%= link_to edit_person_path(person) do %>
+                <span class="glyphicon glyphicon-pencil" rel="tooltip" title="Edit"></span>
+              <% end %>
+            </td>
+            <td><%= link_to person, method: :delete, data: { confirm: 'Are you sure?' }  do %>
+                <span class="glyphicon glyphicon-trash" rel="tooltip" title="Remove"></span>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>
     </table>
+
+    <div class="pagination-holder">
+      <%= will_paginate @people, :renderer => BootstrapPagination::Rails %>
+    </div>
     <% end %>
 
     <br>

@@ -29,4 +29,6 @@ Himmeli::Application.configure do
 
   # Himmeli
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  # set per_page globally
+  WillPaginate.per_page = 50
 end

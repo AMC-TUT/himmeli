@@ -22,12 +22,15 @@ gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
-gem 'active_model_serializers' # https://github.com/rails-api/active_model_serializers
-
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
 # DataHimmeli
+
+gem 'will_paginate', '~> 3.0' # https://github.com/mislav/will_paginate
+gem 'will_paginate-bootstrap'
+
+gem 'active_model_serializers' # https://github.com/rails-api/active_model_serializers
 
 # Auth
 gem 'devise' # https://github.com/plataformatec/devise
@@ -47,6 +50,8 @@ gem 'ember-source', '1.4.0' # or the version you need
 
 # RSpec
 gem 'rspec-rails' # https://github.com/rspec/rspec-rails
+
+gem 'factory_girl' # https://github.com/thoughtbot/factory_girl
 
 #group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

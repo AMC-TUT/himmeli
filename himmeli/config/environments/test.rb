@@ -33,4 +33,9 @@ Himmeli::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  # Himmeli
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  # set per_page globally
+  WillPaginate.per_page = 50
 end
