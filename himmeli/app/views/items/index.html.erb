@@ -24,8 +24,8 @@
             <td><%= item.event.person.first_name %> <%= item.event.person.last_name %>, <%=l item.event.created_at %></td>
             <td><%=l item.created_at %></td>
             <td><%= item.duration %></td>
-            <td style="text-align:center;">
-              <% if item.answer %>
+            <td style="padding-left: 25px;">
+              <% if item.answer? %>
                 <span class="glyphicon glyphicon-ok" style="color: green;"></span>
               <% else %>
                 <span class="glyphicon glyphicon-remove" style="color: red;"></span>

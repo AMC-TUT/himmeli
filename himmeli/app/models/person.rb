@@ -16,4 +16,5 @@ class Person < ActiveRecord::Base
     array.push Event.select('id, scores').where("level = 5 AND person_id = ?", self.id)
     array.push Event.select('id, scores').where("level = 6 AND person_id = ?", self.id)
   end
+
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140318181842) do
+ActiveRecord::Schema.define(version: 20140320095617) do
 
   create_table "events", force: true do |t|
     t.integer  "person_id"
@@ -27,9 +27,11 @@ ActiveRecord::Schema.define(version: 20140318181842) do
   create_table "items", force: true do |t|
     t.integer  "event_id"
     t.integer  "duration",   default: 0
-    t.boolean  "answer",     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "target",     default: 0
+    t.integer  "pointer",    default: 0
+    t.integer  "answer",     default: 0
   end
 
   add_index "items", ["event_id"], name: "index_items_on_event_id", using: :btree

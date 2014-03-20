@@ -9,6 +9,8 @@
           <th>Date</th>
           <th>Duration</th>
           <th>Answer</th>
+          <th>Pointer</th>
+          <th>Target</th>
         </tr>
       </thead>
 
@@ -18,10 +20,24 @@
           <td><%=l @item.created_at %></td>
           <td><%= @item.duration %></td>
           <td style="padding-left: 25px;">
-            <% if @item.answer %>
+            <% if @item.answer? %>
               <span class="glyphicon glyphicon-ok" style="color: green;"></span>
             <% else %>
               <span class="glyphicon glyphicon-remove" style="color: red;"></span>
+            <% end %>
+          </td>
+          <td style="padding-left: 25px;">
+            <% if @item.pointer? %>
+              <span class="glyphicon glyphicon-arrow-right"></span>
+            <% else %>
+              <span class="glyphicon glyphicon-arrow-left"></span>
+            <% end %>
+          </td>
+          <td style="padding-left: 25px;">
+            <% if @item.target? %>
+              <span class="glyphicon glyphicon-arrow-right"></span>
+            <% else %>
+              <span class="glyphicon glyphicon-arrow-left"></span>
             <% end %>
           </td>
         </tr>

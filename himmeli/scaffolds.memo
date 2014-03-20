@@ -16,6 +16,10 @@ rails g scaffold Setting person:references key:string value:string
 rails g scaffold Event person:references duration:integer level:integer scores:integer
 
 rails g scaffold Item event:references duration:integer answer:boolean
+rails generate migration add_target_field_to_item target:integer
+rails generate migration add_pointer_field_to_item pointer:integer
+rails generate migration remove_answer_from_item answer:boolean
+rails generate migration add_answer_field_to_item answer:integer
 
 # , :default => false
 # , index: true
