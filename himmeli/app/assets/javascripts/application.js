@@ -20,57 +20,123 @@ $('span[rel=tooltip]').tooltip({
   placement: "top"
 });
 
-$('.scores-chart-pills a').on('click', function(e) {
-  e.preventDefault();
+if (_.isNull(Himmeli)) Himmeli = {};
+var controller = $('html').attr('class').split(' ').pop();
 
-  var $tgt = $(e.target);
+if (controller == 'people') {
+  $.get('/people/' + Himmeli.id + '.json').then(function(data) {
+    Himmeli['scoresPerEvent'] = data.scoresPerEvent;
+  });
 
-  $tgt.parent('li').addClass('active').siblings().removeClass('active');
+  $('.scores-chart-pills a').on('click', function(e) {
+    e.preventDefault();
 
-  drawScoresPerEventChart( $tgt.data('level') );
+    var $tgt = $(e.target);
+    $tgt.parent('li').addClass('active').siblings().removeClass('active');
+    drawScoresPerEventChart($tgt.data('level'));
+  });
 
-});
+  setTimeout(function() {
+    Himmeli.drawScoresPerEventChart();
+  }, 500);
+}
 
-var Himmeli = {};
+if (controller == 'game') {
+    // $.get('/people/' + Himmeli.id + '.json').then(function(data) {
+  //   Himmeli = data;
+  // });
+}
 
-var pid = 6;
-$.get('http://dev:3000/people/' + pid + '.json').then(function(data) {
-  Himmeli = data;
-});
-
-function drawScoresPerEventChart(level) {
-  var level = level || 1,
-    events = Himmeli.scoresPerEvent[level-1],
+// Helper functions
+Himmeli.drawScoresPerEventChart = function(level) {
+  var lvl = level || 1,
+    events = Himmeli.scoresPerEvent[lvl - 1],
     data = _.pluck(events, 'scores'),
     labels = [];
 
   _.each(events, function(e, index) {
-    labels.push(index+1 + '');
+    labels.push(index + 1 + '');
   });
 
-
   var lineChartData = {
-      labels : labels, // ["January","February","March","April","May","June","July"],
-      datasets : [
-        {
-          fillColor : "rgba(151,187,205,0.5)",
-          strokeColor : "rgba(151,187,205,1)",
-          pointColor : "rgba(151,187,205,1)",
-          pointStrokeColor : "#fff",
-          data : data //[28,48,40,19,96,27,100]
-        }
-      ]
+    labels: labels,
+    datasets: [{
+      fillColor: "rgba(151,187,205,0.5)",
+      strokeColor: "rgba(151,187,205,1)",
+      pointColor: "rgba(151,187,205,1)",
+      pointStrokeColor: "#fff",
+      data: data
+    }]
+  };
 
-    };
+  var chartLine = new Chart(document.getElementById("scoresPerEventChart").getContext("2d")).Bar(lineChartData);
+};
 
-    var chartLine = new Chart(document.getElementById("scoresPerEventChart").getContext("2d")).Line(lineChartData);
-}
+Himmeli.addEvent = function(gameEvent) {
+  // token
+  var token = $('input[name=authenticity_token]').val();
 
-setTimeout(function() {
-  drawScoresPerEventChart();
-}, 300);
+  // request object
+  var json = {
+    'utf8': '✓',
+    'authenticity_token': token,
+    'event': gameEvent
+  };
 
+  // request
+  return $.ajax({
+    dataType: 'json',
+    method: 'post',
+    url: '/events',
+    data: json
+  });
+};
 
+Himmeli.updatePersonLevel = function(level) {
+  // token
+  var token = $('input[name=authenticity_token]').val();
 
+  // request object
+  var json = {
+    'utf8': '✓',
+    'authenticity_token': token,
+    'person': {
+      'level': level
+    }
+  };
 
+  // request
+  return $.ajax({
+    dataType: 'json',
+    method: 'put',
+    url: '/people/' + Himmeli.id,
+    data: json
+  });
+};
 
+Himmeli.getVersions = function() {
+  return $.getJSON('/versions.json');
+};
+
+/*
+var gameEvent = {
+  'person_id': 2,
+  'version_id': 1,
+  'duration': 1098,
+  'level': 4,
+  'scores': 3,
+  'aborted': 1,
+  'items_attributes': [{
+    'duration': 23939,
+    'answer': 1,
+    'pointer': 1,
+    'target': 1
+  }, {
+    'duration': 23939,
+    'answer': 1,
+    'pointer': 1,
+    'target': 1
+  }]
+};
+console.log(Himmeli.addEvent(gameEvent));
+*/

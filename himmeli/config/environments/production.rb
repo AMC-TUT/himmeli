@@ -81,5 +81,7 @@ Himmeli::Application.configure do
   # Himmeli
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
   # set per_page globally
-  WillPaginate.per_page = 50
+  WillPaginate.per_page = 100
+  #
+  I18n.enforce_available_locales = false
 end

@@ -9,12 +9,12 @@ class Person < ActiveRecord::Base
   def scores_per_event_per_level
     array = []
     # TODO refactor
-    array.push Event.select('id, scores').where("level = 1 AND person_id = ?", self.id)
-    array.push Event.select('id, scores').where("level = 2 AND person_id = ?", self.id)
-    array.push Event.select('id, scores').where("level = 3 AND person_id = ?", self.id)
-    array.push Event.select('id, scores').where("level = 4 AND person_id = ?", self.id)
-    array.push Event.select('id, scores').where("level = 5 AND person_id = ?", self.id)
-    array.push Event.select('id, scores').where("level = 6 AND person_id = ?", self.id)
+    array.push Event.select('id, scores, aborted').where("level = 1 AND person_id = ?", self.id)
+    array.push Event.select('id, scores, aborted').where("level = 2 AND person_id = ?", self.id)
+    array.push Event.select('id, scores, aborted').where("level = 3 AND person_id = ?", self.id)
+    array.push Event.select('id, scores, aborted').where("level = 4 AND person_id = ?", self.id)
+    array.push Event.select('id, scores, aborted').where("level = 5 AND person_id = ?", self.id)
+    array.push Event.select('id, scores, aborted').where("level = 6 AND person_id = ?", self.id)
   end
 
 end

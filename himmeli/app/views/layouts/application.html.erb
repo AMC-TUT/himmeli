@@ -31,6 +31,7 @@
             <li><%= link_to 'Events', events_path %></li>
             <li><%= link_to 'Items', items_path %></li>
             <li><%= link_to 'Settings', settings_path %></li>
+            <li><%= link_to 'Versions', versions_path %></li>
             <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -58,6 +59,10 @@
         </p>
       </footer>
     </div>
+
+    <script>
+      var Himmeli = <%= raw(@person.to_json) %>
+    </script>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   </body>
 </html>

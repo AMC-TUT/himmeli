@@ -10,6 +10,7 @@ class PeopleController < ApplicationController
   # GET /people/1
   # GET /people/1.json
   def show
+    @person.scores = @person.events.sum('scores')
   end
 
   # GET /people/new

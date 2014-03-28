@@ -11,6 +11,13 @@
   </div>
 
   <div class="control-group">
+    <%= f.label :version, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.association :version, collection: Version.all(order: 'id'), prompt: "Choose a Version", :label => false, :label_method => lambda { |v| "#{v.id}" }, :value_method => :id, :class => 'form-control', required: true %>
+    </div>
+  </div>
+
+  <div class="control-group">
     <%= f.label :duration, :class => 'control-label' %>
     <div class="controls">
       <%= f.number_field :duration, :class => 'number_field form-control', required: true, :min => 0 %>
@@ -28,6 +35,13 @@
     <%= f.label :scores, :class => 'control-label' %>
     <div class="controls">
       <%= f.number_field :scores, :class => 'number_field form-control', required: true, :min => 0 %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :aborted, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :aborted, :class => 'number_field form-control', required: true, :min => 0 %>
     </div>
   </div>
 

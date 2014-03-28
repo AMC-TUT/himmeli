@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140320095617) do
+ActiveRecord::Schema.define(version: 20140327101716) do
 
   create_table "events", force: true do |t|
     t.integer  "person_id"
@@ -20,9 +20,12 @@ ActiveRecord::Schema.define(version: 20140320095617) do
     t.integer  "scores",     default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "aborted",    default: 0
+    t.integer  "version_id"
   end
 
   add_index "events", ["person_id"], name: "index_events_on_person_id", using: :btree
+  add_index "events", ["version_id"], name: "index_events_on_version_id", using: :btree
 
   create_table "items", force: true do |t|
     t.integer  "event_id"
@@ -72,5 +75,14 @@ ActiveRecord::Schema.define(version: 20140320095617) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "versions", force: true do |t|
+    t.integer  "hit_points",   default: 0
+    t.integer  "target_speed", default: 0
+    t.integer  "rows",         default: 0
+    t.integer  "columns",      default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

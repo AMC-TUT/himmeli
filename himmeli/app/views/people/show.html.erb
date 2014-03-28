@@ -59,7 +59,7 @@
     <div class="card">
       <h2><%= @person.first_name %> <%= @person.last_name %></h2>
       <div class="qrcode">
-        <% link = "/game?p=" + @person.id.to_s %>
+        <% link = "http://10.0.1.3:3000/game/" + @person.id.to_s %>
         <%= link_to link, :target => "_blank" do %>
         <img src="https://chart.googleapis.com/chart?cht=qr&chs=250x250&chl=<%= link %>" />
         <% end %>

@@ -13,6 +13,7 @@
           <th>Duration</th>
           <th>Level</th>
           <th>Scores</th>
+          <th>Aborted</th>
           <th></th>
           <th></th>
           <th></th>
@@ -27,6 +28,13 @@
             <td><%= event.duration %></td>
             <td><%= event.level %></td>
             <td><%= event.scores %></td>
+            <td>
+              <% if event.aborted? %>
+                Yes
+              <% else %>
+                No
+              <% end %>
+            </td>
             <td>
               <%= link_to event  do %>
                 <span class="glyphicon glyphicon-info-sign" rel="tooltip" title="Show"></span>

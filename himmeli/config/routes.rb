@@ -1,4 +1,6 @@
 Himmeli::Application.routes.draw do
+  resources :versions
+
   resources :items
 
   resources :events
@@ -16,6 +18,8 @@ Himmeli::Application.routes.draw do
     registration: 'register',
     sign_up: 'cmon_let_me_in'
   }
+
+  get 'game/:id' => 'game#index'
 
   root to: "people#index"
 

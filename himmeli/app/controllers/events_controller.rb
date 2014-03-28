@@ -15,6 +15,7 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
+    # 2.times { @event.items.build }
   end
 
   # GET /events/1/edit
@@ -24,6 +25,7 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
+    puts event_params.to_yaml
     @event = Event.new(event_params)
 
     respond_to do |format|
@@ -69,6 +71,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:person_id, :duration, :level, :scores)
+      params.require(:event).permit(:person_id, :duration, :level, :scores, :aborted, :version_id, :items_attributes => [:event_id, :duration, :answer, :pointer, :target])
     end
 end

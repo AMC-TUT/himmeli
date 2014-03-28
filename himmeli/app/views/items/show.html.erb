@@ -27,14 +27,14 @@
             <% end %>
           </td>
           <td style="padding-left: 25px;">
-            <% if @item.pointer? %>
+            <% if @item.pointer > 3 %>
               <span class="glyphicon glyphicon-arrow-right"></span>
             <% else %>
               <span class="glyphicon glyphicon-arrow-left"></span>
             <% end %>
           </td>
           <td style="padding-left: 25px;">
-            <% if @item.target? %>
+            <% if @item.target > 3 %>
               <span class="glyphicon glyphicon-arrow-right"></span>
             <% else %>
               <span class="glyphicon glyphicon-arrow-left"></span>

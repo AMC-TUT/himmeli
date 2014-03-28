@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Version</h1>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Version no.</th>
+          <th>Hit points</th>
+          <th>Target speed</th>
+          <th>Rows</th>
+          <th>Columns</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td><%= @version.id %></td>
+          <td><%= @version.hit_points %></td>
+          <td><%= @version.target_speed %></td>
+          <td><%= @version.rows %></td>
+          <td><%= @version.columns %></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <br>
+
+    <%= link_to 'Edit Setting', edit_version_path(@version), :class => 'btn btn-primary' %>
+    <%= link_to 'Back', versions_path, :class => 'btn btn-default' %>
+
+  </div>
+</div>
