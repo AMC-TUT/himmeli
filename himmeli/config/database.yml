@@ -37,6 +37,6 @@ production:
   reconnect: false
   database: himmeli
   pool: 5
-  username: root
-  password: toor
+  username: himmeli
+  password: D55!FV%YxD58Yjwx78SR
   host: localhost
