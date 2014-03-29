@@ -16,14 +16,16 @@
 //= require bootstrap
 //= require_tree .
 
-$('span[rel=tooltip]').tooltip({
-  placement: "top"
-});
+if($('html').hasClass('himmeli')) {
+  $('span[rel=tooltip]').tooltip({
+    placement: "top"
+  });
+}
 
 if (_.isNull(Himmeli)) Himmeli = {};
 var controller = $('html').attr('class').split(' ').pop();
 
-if (controller == 'people') {
+if (controller == 'people' && $('.person-details').length) {
   $.get('/people/' + Himmeli.id + '.json').then(function(data) {
     Himmeli['scoresPerEvent'] = data.scoresPerEvent;
     Himmeli['medianReplyTimes'] = data.medianReplyTimes;
