@@ -26,6 +26,7 @@ var controller = $('html').attr('class').split(' ').pop();
 if (controller == 'people') {
   $.get('/people/' + Himmeli.id + '.json').then(function(data) {
     Himmeli['scoresPerEvent'] = data.scoresPerEvent;
+    Himmeli['medianReplyTimes'] = data.medianReplyTimes;
   });
 
   $('.scores-chart-pills a').on('click', function(e) {
@@ -33,22 +34,22 @@ if (controller == 'people') {
 
     var $tgt = $(e.target);
     $tgt.parent('li').addClass('active').siblings().removeClass('active');
-    Himmeli.drawScoresPerEventChart($tgt.data('level'));
+    Himmeli.scoresPerEventChart($tgt.data('level'));
+    Himmeli.medianReplyTimesChart($tgt.data('level'));
   });
 
   setTimeout(function() {
-    Himmeli.drawScoresPerEventChart();
+    Himmeli.scoresPerEventChart();
+    Himmeli.medianReplyTimesChart();
   }, 500);
 }
 
 if (controller == 'game') {
-  // $.get('/people/' + Himmeli.id + '.json').then(function(data) {
-  //   Himmeli = data;
-  // });
+  //
 }
 
 // Helper functions
-Himmeli.drawScoresPerEventChart = function(level) {
+Himmeli.scoresPerEventChart = function(level) {
   var lvl = level || 1,
     events = Himmeli.scoresPerEvent[lvl - 1],
     data = _.pluck(events, 'scores'),
@@ -70,6 +71,29 @@ Himmeli.drawScoresPerEventChart = function(level) {
   };
 
   var chartLine = new Chart(document.getElementById("scoresPerEventChart").getContext("2d")).Bar(lineChartData);
+};
+
+Himmeli.medianReplyTimesChart = function(level) {
+  var lvl = level || 1,
+    data = Himmeli.medianReplyTimes[lvl - 1],
+    labels = [];
+
+  _.each(data, function(e, index) {
+    labels.push(index + 1);
+  });
+
+  var lineChartData = {
+    labels: labels,
+    datasets: [{
+      fillColor: "rgba(151,187,205,0.5)",
+      strokeColor: "rgba(151,187,205,1)",
+      pointColor: "rgba(151,187,205,1)",
+      pointStrokeColor: "#fff",
+      data: data
+    }]
+  };
+
+  var chartLine = new Chart(document.getElementById("medianReplyTimesChart").getContext("2d")).Line(lineChartData);
 };
 
 Himmeli.addEvent = function(gameEvent) {
@@ -127,6 +151,16 @@ var gameEvent = {
   'scores': 3,
   'aborted': 1,
   'items_attributes': [{
+    'duration': 23939,
+    'answer': 1,
+    'pointer': 1,
+    'target': 1
+  }, {
+    'duration': 23939,
+    'answer': 1,
+    'pointer': 1,
+    'target': 1
+  },{
     'duration': 23939,
     'answer': 1,
     'pointer': 1,

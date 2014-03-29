@@ -1,5 +1,6 @@
 class Item < ActiveRecord::Base
   belongs_to :event
+  belongs_to :person
 
   # validates :event, :presence => true
   # validates :duration, :presence => true
