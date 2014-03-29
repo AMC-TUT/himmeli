@@ -55,7 +55,7 @@ Himmeli.drawScoresPerEventChart = function(level) {
     labels = [];
 
   _.each(events, function(e, index) {
-    labels.push(index + 1 + '');
+    labels.push(e.aborted ? 'A' : index + 1);
   });
 
   var lineChartData = {
