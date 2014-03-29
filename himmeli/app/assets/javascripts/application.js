@@ -33,7 +33,7 @@ if (controller == 'people') {
 
     var $tgt = $(e.target);
     $tgt.parent('li').addClass('active').siblings().removeClass('active');
-    drawScoresPerEventChart($tgt.data('level'));
+    Himmeli.drawScoresPerEventChart($tgt.data('level'));
   });
 
   setTimeout(function() {
@@ -42,7 +42,7 @@ if (controller == 'people') {
 }
 
 if (controller == 'game') {
-    // $.get('/people/' + Himmeli.id + '.json').then(function(data) {
+  // $.get('/people/' + Himmeli.id + '.json').then(function(data) {
   //   Himmeli = data;
   // });
 }
