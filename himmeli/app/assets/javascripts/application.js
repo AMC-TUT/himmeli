@@ -149,7 +149,7 @@ Himmeli.getVersions = function() {
 Himmeli.statsView = function() {
   var $body = $('body');
 
-  var stats = '<div class="stats">' +
+  var stats = '<div class="stats"><div class="content">' +
     '<a href="#" class="btn btn-primary close-btn">Palaa peliin</a>' +
     '<h1>Pelaajan kehittyminen</h1>' +
     '<p><strong>Nimi: ' + Himmeli.first_name + ' ' + Himmeli.last_name + '</strong></p>' +
@@ -167,7 +167,7 @@ Himmeli.statsView = function() {
     '<canvas id="scoresPerEventChart" width="738" height="400"></canvas>' +
     '<h3>Keskimääräinen vastausaika (mediaani)</h3>' +
     '<canvas id="medianReplyTimesChart" width="738" height="400"></canvas>' +
-    '</div>';
+    '</div></div>';
 
   $body.append(stats);
 
