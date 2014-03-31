@@ -186,6 +186,7 @@ Himmeli.statsView = function() {
       $('.close-btn').off('click');
       $('.scores-chart-pills a').off('click');
       $('.stats').remove();
+      $('#cr-stage').show();
     });
   });
 
@@ -205,6 +206,7 @@ Himmeli.statsView = function() {
 
 $('body').on('click', '.help_button', function(e) {
   Himmeli.statsView();
+  $('#cr-stage').hide();
 });
 
 /*
