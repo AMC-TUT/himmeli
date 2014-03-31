@@ -163,9 +163,9 @@ Himmeli.statsView = function() {
     '</ul>' +
     // '<hr>' +
     '<h3>Pisteitä per pelikerta</h3>' +
-    '<canvas id="scoresPerEventChart" width="738" height="400"></canvas>' +
+    '<canvas id="scoresPerEventChart" width="738" height="370"></canvas>' +
     '<h3>Keskimääräinen vastausaika (mediaani)</h3>' +
-    '<canvas id="medianReplyTimesChart" width="738" height="400"></canvas>' +
+    '<canvas id="medianReplyTimesChart" width="738" height="370"></canvas>' +
     '</div></div>';
 
   $body.append(stats);
