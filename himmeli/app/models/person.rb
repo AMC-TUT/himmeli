@@ -34,7 +34,7 @@ class Person < ActiveRecord::Base
         durations = Item.select('duration').where('event_id = ?', event).map {|x| x.duration}
 
         if not durations.empty?
-          ary.push (median(durations) / 1000).round(2) # ms -> s
+          ary.push (median(durations) / 1000) #.round(2) # ms -> s
         end
       end
 
