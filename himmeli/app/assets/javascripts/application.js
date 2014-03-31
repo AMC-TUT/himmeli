@@ -16,7 +16,7 @@
 //= require bootstrap
 //= require_tree .
 
-if($('html').hasClass('himmeli')) {
+if ($('html').hasClass('himmeli')) {
   $('span[rel=tooltip]').tooltip({
     placement: "top"
   });
@@ -29,6 +29,7 @@ if (controller == 'people' && $('.person-details').length) {
   $.get('/people/' + Himmeli.id + '.json').then(function(data) {
     Himmeli['scoresPerEvent'] = data.scoresPerEvent;
     Himmeli['medianReplyTimes'] = data.medianReplyTimes;
+    Himmeli['levelHighscores'] = data.levelHighscores;
   });
 
   $('.scores-chart-pills a').on('click', function(e) {
@@ -143,6 +144,69 @@ Himmeli.updatePersonLevel = function(level) {
 Himmeli.getVersions = function() {
   return $.getJSON('/versions.json');
 };
+
+
+Himmeli.statsView = function() {
+  var $body = $('body');
+
+  var stats = '<div class="stats">' +
+    '<a href="#" class="btn btn-primary close-btn">Palaa peliin</a>' +
+    '<h1>Pelaajan kehittyminen</h1>' +
+    '<p><strong>Nimi: ' + Himmeli.first_name + ' ' + Himmeli.last_name + '</strong></p>' +
+    '<hr>' +
+    '<ul class="nav nav-pills scores-chart-pills">' +
+    '<li class="active"><a href="" data-level="1">Taso 1</a></li>' +
+    '<li><a href="#" data-level="2">Taso 2</a></li>' +
+    '<li><a href="#" data-level="3">Taso 3</a></li>' +
+    '<li><a href="#" data-level="4">Taso 4</a></li>' +
+    '<li><a href="#" data-level="5">Taso 5</a></li>' +
+    '<li><a href="#" data-level="6">Taso 6</a></li>' +
+    '</ul>' +
+    '<hr>' +
+    '<h3>Pisteitä per pelikerta</h3>' +
+    '<canvas id="scoresPerEventChart" width="738" height="400"></canvas>' +
+    '<h3>Keskimääräinen vastausaika (mediaani)</h3>' +
+    '<canvas id="medianReplyTimesChart" width="738" height="400"></canvas>' +
+    '</div>';
+
+  $body.append(stats);
+
+  $('.scores-chart-pills a').on('click', function(e) {
+    e.preventDefault();
+
+    var $tgt = $(e.target);
+    $tgt.parent('li').addClass('active').siblings().removeClass('active');
+    Himmeli.scoresPerEventChart($tgt.data('level'));
+    Himmeli.medianReplyTimesChart($tgt.data('level'));
+  });
+
+  $('.close-btn').on('click', function(e) {
+    e.preventDefault();
+
+    $('.stats').fadeOut(700, function() {
+      $('.close-btn').off('click');
+      $('.scores-chart-pills a').off('click');
+      $('.stats').remove();
+    });
+  });
+
+  // update stats
+  $.get('/people/' + Himmeli.id + '.json').then(function(data) {
+    Himmeli['scoresPerEvent'] = data.scoresPerEvent;
+    Himmeli['medianReplyTimes'] = data.medianReplyTimes;
+
+    $('.stats').fadeIn(700, function() {
+      setTimeout(function() {
+        Himmeli.scoresPerEventChart();
+        Himmeli.medianReplyTimesChart();
+      }, 500);
+    });
+  });
+};
+
+$('body').on('click', '.help_button', function(e) {
+  Himmeli.statsView();
+});
 
 /*
 var gameEvent = {

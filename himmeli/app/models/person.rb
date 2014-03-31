@@ -42,15 +42,20 @@ class Person < ActiveRecord::Base
       array.push(ary)
     end
 
-    # events = self.events
-    # events.each do |event|
-    #   durations = Item.select('duration').where('event_id = ?', event).map {|x| x.duration}
+    array
+  end
 
-    #   if not durations.empty?
-    #     array.push (median(durations).to_i / 1000) # ms -> s
-    #   end
-    # end
-    # puts array.to_yaml
+  def level_highscores
+    size = 6 # level count
+
+    counter = 1
+    array = []
+
+    while counter <= size do
+      max = Event.select('id, MAX(scores) AS scores').where('level = ? AND person_id = ?', counter, self.id)
+      counter += 1
+      array.push(max)
+    end
 
     array
   end

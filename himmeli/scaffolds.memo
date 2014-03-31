@@ -24,6 +24,7 @@ rails generate migration remove_answer_from_item answer:boolean
 rails generate migration add_answer_field_to_item answer:integer
 
 rails g scaffold Version hit_points:integer, target_speed:integer, rows:integer, columns:integer
+rails generate migration add_levels_field_to_version levels:integer
 
 # , :default => false
 # , index: true

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140327101716) do
+ActiveRecord::Schema.define(version: 20140331081604) do
 
   create_table "events", force: true do |t|
     t.integer  "person_id"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 20140327101716) do
     t.integer  "columns",      default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "levels",       default: 6
   end
 
 end

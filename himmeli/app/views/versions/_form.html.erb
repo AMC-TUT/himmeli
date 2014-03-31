@@ -31,6 +31,13 @@
     </div>
   </div>
 
+  <div class="control-group">
+    <%= f.label :levels, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :levels, :class => 'number_field form-control', required: true, :min => 1 %>
+    </div>
+  </div>
+
   <hr>
 
   <div class="form-actions">
