@@ -145,7 +145,6 @@ Himmeli.getVersions = function() {
   return $.getJSON('/versions.json');
 };
 
-
 Himmeli.statsView = function() {
   var $body = $('body');
 
