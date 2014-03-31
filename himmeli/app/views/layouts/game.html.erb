@@ -14,23 +14,18 @@
     form {
       display: none; }
     .stats {
-      /*float: left;*/
-      /*clear: both;*/
-      /*overflow: hidden;*/
       z-index: 9000;
       background: #fff;
       width: 100%;
-      /*min-height: 100%;*/
       padding: 20px;
-     /*// position: absolute;*/
-     /*// top: 0;*/
-      height: 1153px;
-      overflow-y: scroll;
+      overflow: scroll;
       display: none; }
-      .close-btn {
-        position: absolute;
-        right: 40px;
-        top: 40px; }
+    .content {
+      overflow: scroll; }
+    .close-btn {
+      position: absolute;
+      right: 40px;
+      top: 40px; }
   </style>
   <body>
     <%= yield %>
