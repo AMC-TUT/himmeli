@@ -44,7 +44,7 @@ if (controller == 'people' && $('.person-details').length) {
   setTimeout(function() {
     Himmeli.scoresPerEventChart();
     Himmeli.medianReplyTimesChart();
-  }, 500);
+  }, 1000);
 }
 
 if (controller == 'game') {
@@ -163,9 +163,9 @@ Himmeli.statsView = function() {
     '</ul>' +
     '<hr>' +
     '<h3>Pisteitä per pelikerta</h3>' +
-    '<canvas id="scoresPerEventChart" width="738" height="400"></canvas>' +
+    '<canvas id="scoresPerEventChart" width="738" height="300"></canvas>' +
     '<h3>Keskimääräinen vastausaika (mediaani)</h3>' +
-    '<canvas id="medianReplyTimesChart" width="738" height="400"></canvas>' +
+    '<canvas id="medianReplyTimesChart" width="738" height="300"></canvas>' +
     '</div></div>';
 
   $body.append(stats);
@@ -199,7 +199,7 @@ Himmeli.statsView = function() {
       setTimeout(function() {
         Himmeli.scoresPerEventChart();
         Himmeli.medianReplyTimesChart();
-      }, 500);
+      }, 1000);
     });
   });
 };
