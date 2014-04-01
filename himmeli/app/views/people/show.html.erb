@@ -7,7 +7,7 @@
           <th>Person</th>
           <th>Total Scores</th>
           <th>Avg. Scores</th>
-          <th>Avg. Duration</th>
+          <th>Total Duration</th>
           <th>Level</th>
         </tr>
       </thead>
@@ -16,7 +16,7 @@
           <td><%= @person.first_name %> <%= @person.last_name %></td>
           <td><%= @person.events.sum('scores') %></td>
           <td><% unless @person.events.empty? %><%= @person.events.average('scores').floor %><% end %></td>
-            <td><% unless @person.events.empty? %><%= @person.events.average('duration').floor %><% end %></td>
+            <td><% unless @person.events.empty? %><%= distance_of_time_in_words(@person.events.sum('duration')/1000) %><% end %></td>
           <td><%= @person.level %></td>
         </tr>
       </tbody>
