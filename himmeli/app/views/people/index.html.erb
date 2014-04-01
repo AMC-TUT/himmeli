@@ -26,7 +26,7 @@
             <td><%= person.first_name %> <%= person.last_name %></td>
             <td><%= person.events.sum('scores') %></td>
             <td><% unless person.events.empty? %><%= person.events.average('scores').floor %><% end %></td>
-            <td><% unless person.events.empty? %><%= person.events.average('duration').floor %><% end %></td>
+            <td><% unless person.events.empty? %><%= (person.events.average('duration').floor/1000)/60 %> min<% end %></td>
             <td><%= person.level %></td>
             <td>
               <%= link_to person do %>

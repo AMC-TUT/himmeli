@@ -1,3 +1,6 @@
 
 - Ei aktiiviset levelit .btn.disabled graafeista
 - levelHighscore listalta ylimääräiset arrayt pois
+
+- Settings lastLevel:integer
+- saveSettings(settings);

@@ -151,7 +151,6 @@ Himmeli.statsView = function() {
   var stats = '<div class="stats"><div class="content">' +
     '<a href="#" class="btn btn-primary close-btn">Palaa peliin</a>' +
     '<h1>' + Himmeli.first_name + ' ' + Himmeli.last_name + '</h1>' +
-    // '<p><strong>Nimi: ' + Himmeli.first_name + ' ' + Himmeli.last_name + '</strong></p>' +
     '<hr>' +
     '<ul class="nav nav-pills scores-chart-pills">' +
     '<li class="active"><a href="" data-level="1">Taso 1</a></li>' +
@@ -161,7 +160,6 @@ Himmeli.statsView = function() {
     '<li><a href="#" data-level="5">Taso 5</a></li>' +
     '<li><a href="#" data-level="6">Taso 6</a></li>' +
     '</ul>' +
-    // '<hr>' +
     '<h3>Pisteitä per pelikerta</h3>' +
     '<canvas id="scoresPerEventChart" width="730" height="370"></canvas>' +
     '<h3>Keskimääräinen vastausaika (mediaani)</h3>' +
