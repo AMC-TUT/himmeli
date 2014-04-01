@@ -27,6 +27,9 @@ class PeopleController < ApplicationController
   def create
     @person = Person.new(person_params)
 
+    # Create Person settings with default values
+    @person.setting = Setting.create({ :person => @person })
+
     respond_to do |format|
       if @person.save
         format.html { redirect_to @person, notice: 'Person was successfully created.' }

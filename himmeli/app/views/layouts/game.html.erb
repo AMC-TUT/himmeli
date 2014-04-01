@@ -30,6 +30,7 @@
     <script>
       var Himmeli = <%= raw(@person.to_json) %>
       Himmeli.levelHighscores = <%= raw(@person.level_highscores.to_json) %>
+      Himmeli.settings = <%= raw(@person.setting.to_json) %>
     </script>
     <%= javascript_include_tag "application" %>
     <script src="/assets/brainfarmer.min.js"></script>

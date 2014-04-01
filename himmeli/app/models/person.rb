@@ -1,7 +1,9 @@
 class Person < ActiveRecord::Base
-  has_one :setting
-  has_many :events
+  has_one :setting, :dependent => :destroy
+  has_many :events, :dependent => :destroy
   has_many :items, through: :events
+
+  accepts_nested_attributes_for :setting
 
   validates :first_name, :presence => true
   validates :last_name, :presence => true

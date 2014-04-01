@@ -12,6 +12,9 @@ rails g devise:views
 rails g scaffold Person first_name:string last_name:string scores:integer level:integer
 
 rails g scaffold Setting person:references key:string value:string
+rails generate migration add_last_level_field_to_setting last_level:integer
+rails generate migration remove_key_from_setting key:string
+rails generate migration remove_value_from_setting value:string
 
 rails g scaffold Event person:references duration:integer level:integer scores:integer
 rails generate migration add_aborted_field_to_event aborted:integer

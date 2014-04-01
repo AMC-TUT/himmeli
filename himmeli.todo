@@ -1,6 +1,8 @@
 
 - Ei aktiiviset levelit .btn.disabled graafeista
+- Desimaalit pois taulukoista
 - levelHighscore listalta ylimääräiset arrayt pois
 
-- Settings lastLevel:integer
+COMMITTED - Settings lastLevel:integer
 - saveSettings(settings);
+

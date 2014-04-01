@@ -10,8 +10,7 @@
       <thead>
         <tr>
           <th>Person</th>
-          <th>Key</th>
-          <th>Value</th>
+          <th>Last Level</th>
           <th></th>
           <th></th>
           <th></th>
@@ -22,8 +21,7 @@
         <% @settings.each do |setting| %>
           <tr>
             <td><%= setting.person.first_name %> <%= setting.person.last_name %></td>
-            <td><%= setting.key %></td>
-            <td><%= setting.value %></td>
+            <td><%= setting.last_level %></td>
             <td>
               <%= link_to setting do %>
                 <span class="glyphicon glyphicon-info-sign" rel="tooltip" title="Show"></span>

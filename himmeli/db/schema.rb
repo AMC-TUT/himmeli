@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140331081604) do
+ActiveRecord::Schema.define(version: 20140401123055) do
 
   create_table "events", force: true do |t|
     t.integer  "person_id"
@@ -50,10 +50,9 @@ ActiveRecord::Schema.define(version: 20140331081604) do
 
   create_table "settings", force: true do |t|
     t.integer  "person_id"
-    t.string   "key"
-    t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "last_level", default: 1
   end
 
   add_index "settings", ["person_id"], name: "index_settings_on_person_id", using: :btree
