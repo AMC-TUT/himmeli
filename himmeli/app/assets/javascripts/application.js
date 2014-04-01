@@ -204,7 +204,7 @@ Himmeli.statsView = function() {
   });
 };
 
-$('body').on('click', '.help_button', function(e) {
+$('body').on('click', '.stats_button', function(e) {
   Himmeli.statsView();
   $('#cr-stage').hide();
 });
