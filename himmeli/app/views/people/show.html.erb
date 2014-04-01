@@ -59,9 +59,7 @@
       <h2><%= @person.first_name %> <%= @person.last_name %></h2>
       <div class="qrcode">
         <% link = "http://himmeli.pori.tut.fi/game/" + @person.id.to_s %>
-        <%= link_to link, :target => "_blank" do %>
         <img src="https://chart.googleapis.com/chart?cht=qr&chs=250x250&chl=<%= link %>" />
-        <% end %>
       </div>
     </div>
 
