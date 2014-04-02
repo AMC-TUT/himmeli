@@ -3,6 +3,9 @@
 - Desimaalit pois taulukoista
 - levelHighscore listalta ylimääräiset arrayt pois
 
+- ipad air chart.js zoom bug
+
 COMMITTED - Settings lastLevel:integer
 - saveSettings(settings);
 
+- devise muuta email usernameksi

@@ -119,6 +119,26 @@ Himmeli.addEvent = function(gameEvent) {
   });
 };
 
+Himmeli.updateSettings = function(settings) {
+  // token
+  var token = $('input[name=authenticity_token]').val();
+
+  // request object
+  var json = {
+    'utf8': '✓',
+    'authenticity_token': token,
+    'setting': settings
+  };
+
+  // request
+  return $.ajax({
+    dataType: 'json',
+    method: 'put',
+    url: '/settings/' + Himmeli.settings.id,
+    data: json
+  });
+};
+
 Himmeli.updatePersonLevel = function(level) {
   // token
   var token = $('input[name=authenticity_token]').val();
