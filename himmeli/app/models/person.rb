@@ -54,11 +54,12 @@ class Person < ActiveRecord::Base
     array = []
 
     while counter <= size do
-      max = Event.select('id, MAX(scores) AS scores').where('level = ? AND person_id = ?', counter, self.id)
-      counter += 1
-      array.push(max)
-    end
+      max = Event.select('MAX(scores) AS scores').where('level = ? AND person_id = ?', counter, self.id).map {|x| x.scores.nil? ? 0 : x.scores }
 
+      counter += 1
+      array.push(max.first)
+    end
+    puts array.to_json
     array
   end
 

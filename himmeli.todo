@@ -1,11 +1,13 @@
 
 - Ei aktiiviset levelit .btn.disabled graafeista
 - Desimaalit pois taulukoista
-- levelHighscore listalta ylimääräiset arrayt pois
 
 - ipad air chart.js zoom bug
 
-COMMITTED - Settings lastLevel:integer
-- saveSettings(settings);
-
 - devise muuta email usernameksi
+
+COMMITTED - Settings lastLevel:integer
+COMMITTED - saveSettings(settings);
+COMMITTED - levelHighscore listalta ylimääräiset arrayt pois
+
+
