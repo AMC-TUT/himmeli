@@ -59,7 +59,7 @@ class Person < ActiveRecord::Base
       counter += 1
       array.push(max.first)
     end
-    puts array.to_json
+
     array
   end
 
