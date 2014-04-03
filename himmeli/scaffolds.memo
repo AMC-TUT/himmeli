@@ -4,6 +4,7 @@ rails generate simple_form:install --bootstrap
 rails generate devise:install
 
 rails generate devise User
+rails generate migration add_username_field_to_user username:string
 
 bundle exec rake db:migrate
 

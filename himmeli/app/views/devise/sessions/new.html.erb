@@ -1,12 +1,12 @@
 <%= simple_form_for(resource, :as => resource_name, :html => { :class => 'form-signin' }, :url => session_path(resource_name) ) do |f| %>
   <h2 class="form-signin-heading">Please sign in</h2>
   <%= bootstrap_flash %>
-  <%= f.text_field :email, autofocus: true, class: 'form-control', placeholder: 'Email' %>
+  <%= f.text_field :username, autofocus: true, class: 'form-control', placeholder: 'Username' %>
   <%= f.password_field :password, class: 'form-control', placeholder: 'Password' %>
 
   <div class="checkbox">
     <label>
-      <%= f.input :remember_me, :as => :boolean, :label => false if devise_mapping.rememberable? %> Check me out
+      <%= f.input :remember_me, :as => :boolean, :label => false if devise_mapping.rememberable? %> Remember me
     </label>
   </div>
 

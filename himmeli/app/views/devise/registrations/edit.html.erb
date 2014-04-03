@@ -6,6 +6,8 @@
 
   <%= f.text_field :email, :required => true, autofocus: true, class: 'form-control', placeholder: 'Email' %>
 
+  <%= f.text_field :username, :required => true, class: 'form-control', placeholder: 'Username' %>
+
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
   <% end %>
