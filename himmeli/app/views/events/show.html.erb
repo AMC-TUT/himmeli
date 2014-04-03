@@ -18,7 +18,7 @@
         <tr>
           <td><%= @event.person.first_name %> <%= @event.person.last_name %></td>
           <td><%=l @event.created_at %></td>
-          <td><%= @event.duration %></td>
+          <td><%= distance_of_time_in_words(@event.duration/1000) %> sec</td>
           <td><%= @event.level %></td>
           <td><%= @event.scores %></td>
           <td>
@@ -32,11 +32,64 @@
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <h1>Event items</h1>
+
+    <% if @event.items.blank? %>
+      <%= render :partial => 'shared/empty' %>
+    <% else %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Duration</th>
+          <th>Answer</th>
+          <th>Pointer</th>
+          <th>Target</th>
+          <th style="width:30%;"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @event.items.each do |item| %>
+          <tr>
+            <td><%=l item.created_at %></td>
+            <td><%= item.duration/1000 %> sec</td>
+            <td style="padding-left: 25px;">
+              <% if item.answer? %>
+                <span class="glyphicon glyphicon-ok" style="color: green;"></span>
+              <% else %>
+                <span class="glyphicon glyphicon-remove" style="color: red;"></span>
+              <% end %>
+            </td>
+            <td style="padding-left: 25px;">
+            <% if item.pointer >= 1 %>
+              <span class="glyphicon glyphicon-arrow-right"></span>
+            <% else %>
+              <span class="glyphicon glyphicon-arrow-left"></span>
+            <% end %>
+          </td>
+          <td style="padding-left: 25px;">
+            <% if item.target % 2 == 0 %>
+              <span class="glyphicon glyphicon-arrow-right"></span>
+            <% else %>
+              <span class="glyphicon glyphicon-arrow-left"></span>
+            <% end %>
+          </td>
+            <td></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% end %>
 
     <br>
 
     <%= link_to 'Edit Event', edit_event_path(@event), :class => 'btn btn-primary' %>
     <%= link_to 'Back', events_path, :class => 'btn btn-default' %>
-
   </div>
 </div>

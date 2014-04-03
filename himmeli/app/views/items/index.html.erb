@@ -23,7 +23,7 @@
           <tr>
             <td><%= item.event.person.first_name %> <%= item.event.person.last_name %>, <%=l item.event.created_at %></td>
             <td><%=l item.created_at %></td>
-            <td><%= item.duration %></td>
+            <td><%= item.duration/1000 %> sec</td>
             <td style="padding-left: 25px;">
               <% if item.answer? %>
                 <span class="glyphicon glyphicon-ok" style="color: green;"></span>

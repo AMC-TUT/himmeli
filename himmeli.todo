@@ -4,9 +4,7 @@
 - Desimaalit pois taulukoista
 - ipad air chart.js zoom bug
 
-# muut
-- devise muuta email usernameksi
-
+COMMITTED - devise muuta email usernameksi
 COMMITTED - Settings lastLevel:integer
 COMMITTED - saveSettings(settings);
 COMMITTED - levelHighscore listalta ylimääräiset arrayt pois
