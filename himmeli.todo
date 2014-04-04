@@ -1,8 +1,7 @@
 
-# chart.js
-- Ei aktiiviset levelit .btn.disabled graafeista
-- Desimaalit pois taulukoista
-- ipad air chart.js zoom bug
+COMMITTED - Ei aktiiviset levelit .btn.disabled graafeista
+COMMITTED - Desimaalit pois taulukoista
+COMMITTED - ipad air chart.js zoom bug
 
 COMMITTED - devise muuta email usernameksi
 COMMITTED - Settings lastLevel:integer

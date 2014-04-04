@@ -7,23 +7,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Brain Farmer</title>
+
+    <script type="text/javascript" src="//www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load('visualization', '1', {packages:["corechart"]});
+    </script>
+
     <%= stylesheet_link_tag "application", media: "all" %>
     <%= csrf_meta_tags %>
   </head>
-  <style type="text/css">
-    form {
-      display: none; }
-    .stats {
-      z-index: 9000;
-      background: #fff;
-      width: 100%;
-      padding: 0 20px 20px;
-      display: none; }
-    .close-btn {
-      position: absolute;
-      right: 40px;
-      top: 20px; }
-  </style>
   <body>
     <%= yield %>
 
@@ -32,6 +24,7 @@
       Himmeli.levelHighscores = <%= raw(@person.level_highscores.to_json) %>
       Himmeli.settings = <%= raw(@person.setting.to_json) %>
     </script>
+
     <%= javascript_include_tag "application" %>
     <script src="/assets/brainfarmer.min.js"></script>
   </body>

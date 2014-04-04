@@ -26,19 +26,29 @@ if (_.isNull(Himmeli)) Himmeli = {};
 var controller = $('html').attr('class').split(' ').pop();
 
 if (controller == 'people' && $('.person-details').length) {
+
   $.get('/people/' + Himmeli.id + '.json').then(function(data) {
     Himmeli['scoresPerEvent'] = data.scoresPerEvent;
     Himmeli['medianReplyTimes'] = data.medianReplyTimes;
     Himmeli['levelHighscores'] = data.levelHighscores;
-  });
 
-  $('.scores-chart-pills a').on('click', function(e) {
-    e.preventDefault();
+    $('.chart-pills').append(Himmeli.htmlPills());
 
-    var $tgt = $(e.target);
-    $tgt.parent('li').addClass('active').siblings().removeClass('active');
-    Himmeli.scoresPerEventChart($tgt.data('level'));
-    Himmeli.medianReplyTimesChart($tgt.data('level'));
+    $('.chart-pills a').on('click', function(e) {
+      e.preventDefault();
+
+      var $tgt = $(e.target);
+
+      if ($tgt.parent().hasClass('disabled')) return false; // disabled buttons
+
+      $tgt.parent('li').addClass('active').siblings().removeClass('active');
+
+      setTimeout(function() {
+        Himmeli.scoresPerEventChart($tgt.data('level'));
+        Himmeli.medianReplyTimesChart($tgt.data('level'));
+      }, 500);
+    });
+
   });
 
   setTimeout(function() {
@@ -51,52 +61,98 @@ if (controller == 'game') {
   //
 }
 
+Himmeli.htmlPills = function() {
+  var pills = '';
+
+  _.each(Himmeli.scoresPerEvent, function(e, index) {
+    var active = index === 0 ? 'active' : '',
+      disabled = e.length < 2 ? 'disabled' : '',
+      level = index + 1;
+
+    pills += '<li class="' + active + ' ' + disabled + '"><a href="#" data-level="' + level + '">Level ' + level + '</a></li>';
+  });
+
+  return pills;
+};
+
 // Helper functions
 Himmeli.scoresPerEventChart = function(level) {
   var lvl = level || 1,
     events = Himmeli.scoresPerEvent[lvl - 1],
-    data = _.pluck(events, 'scores'),
-    labels = [];
+    scores = _.pluck(events, 'scores');
+
+  chartArray = [];
+  chartArray.push(['Event', 'Game Over', 'Aborted', {
+    role: 'style'
+  }]);
 
   _.each(events, function(e, index) {
-    labels.push(e.aborted ? 'A' : index + 1);
+    var label = '',
+      red = e.aborted ? e.scores : 0;
+    blue = e.aborted ? 0 : e.scores;
+    style = e.aborted ?
+      'stroke-color: #D44950; stroke-opacity: 1; stroke-width: 1; fill-color: #D44950; fill-opacity: 0.5' : 'stroke-color: #97BBCD; stroke-opacity: 1; stroke-width: 1; fill-color: #97BBCD; fill-opacity: 0.5';
+
+    var a = [label, blue, red, style];
+    chartArray.push(a);
   });
 
-  var lineChartData = {
-    labels: labels,
-    datasets: [{
-      fillColor: "rgba(151,187,205,0.5)",
-      strokeColor: "rgba(151,187,205,1)",
-      pointColor: "rgba(151,187,205,1)",
-      pointStrokeColor: "#fff",
-      data: data
-    }]
+  var data = google.visualization.arrayToDataTable(chartArray);
+
+  var options = {
+    width: 738,
+    height: 400,
+    legend: {
+      position: 'none'
+    },
+    bar: {
+      groupWidth: '75%'
+    },
+    isStacked: true,
+    'chartArea': {
+      'width': '90%',
+      'height': '90%'
+    }
   };
 
-  var chartLine = new Chart(document.getElementById("scoresPerEventChart").getContext("2d")).Bar(lineChartData);
+  var chart = new google.visualization.ColumnChart(document.getElementById('scoresPerEventChart'));
+  chart.draw(data, options);
 };
 
 Himmeli.medianReplyTimesChart = function(level) {
   var lvl = level || 1,
-    data = Himmeli.medianReplyTimes[lvl - 1],
+    secs = Himmeli.medianReplyTimes[lvl - 1],
     labels = [];
 
-  _.each(data, function(e, index) {
-    labels.push(index + 1);
+  chartArray = [];
+  chartArray.push(['Duration', 'Seconds']);
+
+  _.each(secs, function(s, index) {
+    var label = '',
+      sec = s / 1000;
+
+    var a = [label, sec];
+    chartArray.push(a);
   });
 
-  var lineChartData = {
-    labels: labels,
-    datasets: [{
-      fillColor: "rgba(151,187,205,0.5)",
-      strokeColor: "rgba(151,187,205,1)",
-      pointColor: "rgba(151,187,205,1)",
-      pointStrokeColor: "#fff",
-      data: data
-    }]
+  // Create and populate the data table.
+  var data = google.visualization.arrayToDataTable(chartArray);
+
+  var options = {
+    width: 738,
+    height: 400,
+    curveType: 'function',
+    legend: {
+      position: 'none'
+    },
+    'chartArea': {
+      'width': '90%',
+      'height': '90%'
+    }
   };
 
-  var chartLine = new Chart(document.getElementById("medianReplyTimesChart").getContext("2d")).Line(lineChartData);
+  var chart = new google.visualization.LineChart(document.getElementById('medianReplyTimesChart'));
+  chart.draw(data, options);
 };
 
 Himmeli.addEvent = function(gameEvent) {
@@ -167,51 +223,52 @@ Himmeli.getVersions = function() {
 
 Himmeli.statsView = function() {
   var $body = $('body');
-
+  console.log(Himmeli.htmlPills());
   var stats = '<div class="stats"><div class="content">' +
     '<a href="#" class="btn btn-primary close-btn">Palaa peliin</a>' +
     '<h1>' + Himmeli.first_name + ' ' + Himmeli.last_name + '</h1>' +
     '<hr>' +
-    '<ul class="nav nav-pills scores-chart-pills">' +
-    '<li class="active"><a href="" data-level="1">Taso 1</a></li>' +
-    '<li><a href="#" data-level="2">Taso 2</a></li>' +
-    '<li><a href="#" data-level="3">Taso 3</a></li>' +
-    '<li><a href="#" data-level="4">Taso 4</a></li>' +
-    '<li><a href="#" data-level="5">Taso 5</a></li>' +
-    '<li><a href="#" data-level="6">Taso 6</a></li>' +
-    '</ul>' +
+    '<ul class="nav nav-pills chart-pills"></ul>' +
     '<h3>Pisteitä per pelikerta</h3>' +
-    '<canvas id="scoresPerEventChart" width="730" height="370"></canvas>' +
+    '<div id="scoresPerEventChart" style="width: 738px; height: 400px;"></div>' +
     '<h3>Keskimääräinen vastausaika (mediaani)</h3>' +
-    '<canvas id="medianReplyTimesChart" width="730" height="370"></canvas>' +
+    '<div id="medianReplyTimesChart" style="width: 738px; height: 400px;"></div>' +
     '</div></div>';
 
   $body.append(stats);
-
-  $('.scores-chart-pills a').on('click', function(e) {
-    e.preventDefault();
-
-    var $tgt = $(e.target);
-    $tgt.parent('li').addClass('active').siblings().removeClass('active');
-    Himmeli.scoresPerEventChart($tgt.data('level'));
-    Himmeli.medianReplyTimesChart($tgt.data('level'));
-  });
-
-  $('.close-btn').on('click', function(e) {
-    e.preventDefault();
-
-    $('.stats').fadeOut(700, function() {
-      $('.close-btn').off('click');
-      $('.scores-chart-pills a').off('click');
-      $('.stats').remove();
-      $('#cr-stage').show();
-    });
-  });
 
   // update stats
   $.get('/people/' + Himmeli.id + '.json').then(function(data) {
     Himmeli['scoresPerEvent'] = data.scoresPerEvent;
     Himmeli['medianReplyTimes'] = data.medianReplyTimes;
+
+    $('.chart-pills').append(Himmeli.htmlPills());
+
+    $('.chart-pills a').on('click', function(e) {
+      e.preventDefault();
+
+      var $tgt = $(e.target);
+
+      if ($tgt.parent().hasClass('disabled')) return false; // disabled buttons
+
+      $tgt.parent('li').addClass('active').siblings().removeClass('active');
+
+      setTimeout(function() {
+        Himmeli.scoresPerEventChart($tgt.data('level'));
+        Himmeli.medianReplyTimesChart($tgt.data('level'));
+      }, 500);
+    });
+
+    $('.close-btn').on('click', function(e) {
+      e.preventDefault();
+
+      $('.stats').fadeOut(700, function() {
+        $('.close-btn').off('click');
+        $('.chart-pills a').off('click');
+        $('.stats').remove();
+        $('#cr-stage').show();
+      });
+    });
 
     $('.stats').fadeIn(700, function() {
       setTimeout(function() {
@@ -226,36 +283,3 @@ $('body').on('click', '.stats_button', function(e) {
   Himmeli.statsView();
   $('#cr-stage').hide();
 });
-
-/*
-var gameEvent = {
-  'person_id': 2,
-  'version_id': 1,
-  'duration': 1098,
-  'level': 4,
-  'scores': 3,
-  'aborted': 1,
-  'items_attributes': [{
-    'duration': 23939,
-    'answer': 1,
-    'pointer': 1,
-    'target': 1
-  }, {
-    'duration': 23939,
-    'answer': 1,
-    'pointer': 1,
-    'target': 1
-  },{
-    'duration': 23939,
-    'answer': 1,
-    'pointer': 1,
-    'target': 1
-  }, {
-    'duration': 23939,
-    'answer': 1,
-    'pointer': 1,
-    'target': 1
-  }]
-};
-console.log(Himmeli.addEvent(gameEvent));
-*/
