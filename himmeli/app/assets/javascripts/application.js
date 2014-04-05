@@ -72,6 +72,8 @@ Himmeli.htmlPills = function() {
     pills += '<li class="' + active + ' ' + disabled + '"><a href="#" data-level="' + level + '">Level ' + level + '</a></li>';
   });
 
+  $('.chart-pills').empty();
+
   return pills;
 };
 
