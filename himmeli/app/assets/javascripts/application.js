@@ -66,7 +66,7 @@ Himmeli.htmlPills = function() {
 
   _.each(Himmeli.scoresPerEvent, function(e, index) {
     var active = index === 0 ? 'active' : '',
-      disabled = e.length < 2 ? 'disabled' : '',
+      disabled = e.length < 1 ? 'disabled' : '',
       level = index + 1;
 
     pills += '<li class="' + active + ' ' + disabled + '"><a href="#" data-level="' + level + '">Level ' + level + '</a></li>';
@@ -225,7 +225,7 @@ Himmeli.getVersions = function() {
 
 Himmeli.statsView = function() {
   var $body = $('body');
-  console.log(Himmeli.htmlPills());
+
   var stats = '<div class="stats"><div class="content">' +
     '<a href="#" class="btn btn-primary close-btn">Palaa peliin</a>' +
     '<h1>' + Himmeli.first_name + ' ' + Himmeli.last_name + '</h1>' +
