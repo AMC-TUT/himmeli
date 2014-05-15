@@ -22,7 +22,7 @@ if ($('html').hasClass('himmeli')) {
   });
 }
 
-if (_.isNull(Himmeli)) Himmeli = {};
+if (_.isUndefined(Himmeli) || _.isNull(Himmeli)) Himmeli = {};
 var controller = $('html').attr('class').split(' ').pop();
 
 if (controller == 'people' && $('.person-details').length) {
@@ -57,8 +57,38 @@ if (controller == 'people' && $('.person-details').length) {
   }, 1000);
 }
 
-if (controller == 'game') {
-  //
+if (controller == 'himmeli') { // TMP
+  // token
+  var token = $('meta[name=csrf-token]').attr('content');
+  // request object
+  var json = {
+    'utf8': '✓',
+    'authenticity_token': token,
+    'user': {
+      'username': 'kayttaja',
+      'password': 'tunnus'
+    }
+  };
+  // request
+  $.ajax({
+    dataType: 'json',
+    method: 'post',
+    url: '/auth/login',
+    data: json
+  }).then(function(data, textStatus, xhr) {
+    $.getJSON('people.json').then(function(people) {
+      var options = _.map(people, function(person) {
+        return '<option value="' + person.id + '">' + person.first_name + ' ' + person.last_name + '</option>';
+      });
+
+      $('select').empty().append(options);
+
+      $('.jatka').on('click', function(event) {
+        var playerId = $('select').val();
+        window.location = '/game/' + playerId;
+      });
+    });
+  });
 }
 
 Himmeli.htmlPills = function() {

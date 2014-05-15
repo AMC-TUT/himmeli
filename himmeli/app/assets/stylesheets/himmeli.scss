@@ -90,6 +90,42 @@ button:focus {
   }
 }
 
+.login-window {
+  margin: 0 auto;
+  font-family: 'Patrick Hand';
+  width: 768px;
+  height: 1024px;
+  background: #eee url('bg-login.png') 0 0 no-repeat;
+
+  .title {
+    text-align: center;
+    padding-top: 100px;
+  }
+
+  .form {
+    display: block;
+    margin: 0 auto;
+    width: 600px;
+
+    label {
+      font-size: 42px;
+    }
+
+    select {
+      font-size: 45px;
+      height: 66px;
+      box-shadow: none;
+      background-color: #FFF;
+    }
+
+    img {
+      height: 90px;
+      width: auto;
+    }
+
+  }
+}
+
 .lammaspeli {
   form {
     display: none;

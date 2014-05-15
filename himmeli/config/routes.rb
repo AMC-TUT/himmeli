@@ -21,6 +21,8 @@ Himmeli::Application.routes.draw do
 
   get 'game/:id' => 'game#index'
 
+  get 'himmeli' => 'himmeli#login'
+
   root to: "people#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
